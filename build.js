@@ -147,9 +147,9 @@ function ReplaceCommonPath() {
             }
 
             const html = fs.readFileSync(srcFile, "utf-8");
-            // this should be replace with the relative path to $common folder in the root depending on the depth of the current file
+            // this should be replace with the relative path to $common folder in the root depending on the depth of the current file (one less than it should be)
             const relativePath = path.relative(path.dirname(srcFile), "$common");
-            const replacedHtml = html.replace(/\{\$common\}/g, relativePath);
+            const replacedHtml = html.replace(/\{\$common\}/g, relativePath).replace(/\.\.\\\$common/g, "$common");
             fs.writeFileSync(srcFile, replacedHtml, "utf-8");
 
         }
