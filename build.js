@@ -89,7 +89,7 @@ function FilterLangTags() {
                 continue;
             }
 
-            if (entry.name.endsWith(".html")) {
+            if (!entry.name.endsWith(".html")) {
                 continue;
             }
 
@@ -148,10 +148,10 @@ function ReplaceCommonPath() {
 
             if (entry.isDirectory()) {
                 walk(srcFile);
-                continue;
+                continue;''
             }
 
-            if (entry.name.endsWith(".html")) {
+            if (!entry.name.endsWith(".html")) {
                 continue;
             }
 
