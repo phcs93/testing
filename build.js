@@ -89,7 +89,7 @@ function FilterLangTags() {
                 continue;
             }
 
-            if (!isTextFile(entry.name)) {
+            if (entry.name.endsWith(".html")) {
                 continue;
             }
 
