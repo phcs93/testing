@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 
 const langs = ["en", "pt"];
 
@@ -22,15 +23,6 @@ function CopyCommonFiles() {
     fs.rmSync(`bin/$common/src/pages`, { recursive: true, force: true });
 
 }
-
-// function CreateLangFolders() {
-
-//     for (const lang of langs) {
-//         const langFolder = `bin/${lang}`;
-//         fs.mkdirSync(langFolder);
-//     }
-
-// }
 
 function CopyPagesToLangFolders() {
 
@@ -83,8 +75,10 @@ function FilterLangTags() {
 
     const filter = (html, lang) => {
         return html
+            .replace(new RegExp(`\\{lang\\}`, 'gi'), lang)
             .replace(new RegExp(`<([a-z0-9]+)\\b[^>]*\\blang="(?!${lang}")[^"]+"[^>]*>[\\s\\S]*?<\\/\\1>`, 'gi'), '')
-            .replace(new RegExp(`\\s+lang="${lang}"`, 'gi'), '')
+            .replace(new RegExp(`<([a-z0-9]+)\\b[^>]*\\blang="(?!${lang}")[^"]+"[^>]*\\/?>`, 'gi'), '')
+            .replace(new RegExp(`(<(?!html)[a-z0-9]+\\b[^>]*)(\\s+lang="[^"]+")([^>]*>)`, 'gi'), '$1$3')
         ;
     };
 
@@ -107,8 +101,68 @@ function FilterLangTags() {
 
 }
 
+function AddCommonIndexHtml() {
+
+    const walk = (currentSrc, depth) => {
+        const entries = fs.readdirSync(currentSrc, { withFileTypes: true });
+
+        for (const entry of entries) {
+            const srcFile = currentSrc + "/" + entry.name;
+
+            if (entry.isDirectory()) {
+                walk(srcFile, depth + 1);
+                continue;
+            }
+
+            // Check if the file is an HTML file
+            if (entry.name.endsWith(".html") && depth > 0) {
+                // get content of common index.html
+                const commonIndexHtml = fs.readFileSync("index.html", "utf-8");
+                // get content of current html file
+                const currentHtml = fs.readFileSync(srcFile, "utf-8");
+                // replace the content of current html file with common index.html content
+                const replacedHtml = commonIndexHtml.replace("{content}", currentHtml);
+                fs.writeFileSync(srcFile, replacedHtml, "utf-8");
+            }
+        }
+    };
+
+    walk("bin", 0);
+
+}
+
+function ReplaceCommonPath() {
+
+    const walk = (currentSrc) => {
+
+        const entries = fs.readdirSync(currentSrc, { withFileTypes: true });
+
+        for (const entry of entries) {
+
+            const srcFile = currentSrc + "/" + entry.name;
+
+            if (entry.isDirectory()) {
+                walk(srcFile);
+                continue;
+            }
+
+            const html = fs.readFileSync(srcFile, "utf-8");
+            // this should be replace with the relative path to $common folder in the root depending on the depth of the current file
+            const relativePath = path.relative(path.dirname(srcFile), "$common");
+            const replacedHtml = html.replace(/\{\$common\}/g, relativePath);
+            fs.writeFileSync(srcFile, replacedHtml, "utf-8");
+
+        }
+
+    };
+
+    walk("bin");
+
+}
+
 CreateBinFolder();
 CopyCommonFiles();
-// CreateLangFolders();
 CopyPagesToLangFolders();
+AddCommonIndexHtml();
 FilterLangTags();
+ReplaceCommonPath();

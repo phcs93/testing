@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="{lang}">
 
     <head>
 
@@ -8,21 +8,21 @@
 
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">    
 
-        <link rel="shortcut icon" href="res/favicon.png" type="image/x-icon">
+        <link rel="shortcut icon" href="{$common}/res/favicon.png" type="image/x-icon">
 
-        <link rel="stylesheet" href="lib/el-checkbox/el-checkbox.css">
+        <link rel="stylesheet" href="{$common}/lib/el-checkbox/el-checkbox.css">
 
-        <link rel="stylesheet" href="src/styles/colors.css">
-        <link rel="stylesheet" href="src/styles/flex.css">
-        <link rel="stylesheet" href="src/styles/menu.css">
-        <link rel="stylesheet" href="src/styles/style.css">
-        <link rel="stylesheet" href="src/styles/terminator.css">
+        <link rel="stylesheet" href="{$common}/src/styles/colors.css">
+        <link rel="stylesheet" href="{$common}/src/styles/flex.css">
+        <link rel="stylesheet" href="{$common}/src/styles/menu.css">
+        <link rel="stylesheet" href="{$common}/src/styles/style.css">
+        <link rel="stylesheet" href="{$common}/src/styles/terminator.css">
 
-        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="{$common}/src/styles/index.css">
         <script src="index.js"></script>
 
-        <link rel="stylesheet" href="src/styles/inflames.css">
-        <script src="src/scripts/inflames.js"></script>
+        <link rel="stylesheet" href="{$common}/src/styles/inflames.css">
+        <script src="{$common}/src/scripts/inflames.js"></script>
 
     </head>
 
@@ -35,23 +35,23 @@
             <div class="flex-rows flex-gap-16 padding-16" style="position: absolute; top: 64px; left: calc(50% - 144px);">
 
                 <div class="flex-justify-content-center">
-                    <img id="icon" src="res/icon.gif" alt="produke icon">                
+                    <img id="icon" src="{$common}/res/icon.gif" alt="produke icon">                
                 </div>
     
                 <div class="flex-justify-content-center">
-                    <img id="logo" src="res/logo.png" alt="produke logo">
+                    <img id="logo" src="{$common}/res/logo.png" alt="produke logo">
                 </div>      
                 
                 <div class="flex-justify-content-center">
-                    <img id="author" src="res/byhellfire.png" alt="produke author">
+                    <img id="author" src="{$common}/res/byhellfire.png" alt="produke author">
                 </div>
 
             </div>
 
             <div class="flex-rows flex-gap-16 padding-16" style="position: absolute; top: 32px; right: 32px;">
                 <button id="toggle-inflames">
-                    <img src="res/icons/pause.svg" id="pause-icon" alt="pause animation">
-                    <img src="res/icons/play.svg" id="play-icon" alt="play animation">                    
+                    <img src="{$common}/res/icons/pause.svg" id="pause-icon" alt="pause animation">
+                    <img src="{$common}/res/icons/play.svg" id="play-icon" alt="play animation">                    
                 </button>
             </div>
 
@@ -59,7 +59,9 @@
 
                 <div id="navbar" class="flex-columns flex-grow flex-justify-content-center flex-gap-16">
 
-                    <a href="/">
+                    navbar
+
+                    <!-- <a href="/">
                         <span lang="en">HOME</span>
                         <span lang="pt">INICIO</span>
                     </a>
@@ -111,15 +113,17 @@
                     <select id="lang">
                         <option value="en">EN</option>
                         <option value="pt">PT</option>
-                    </select>
+                    </select> -->
 
                 </div>
         
-                <div id="container" class="flex-justify-content-center"></div>
+                <div id="container" class="flex-justify-content-center">
+                    {content}
+                </div>
 
                 <div class="flex-justify-content-center">
                     <a href="https://github.com/phcs93/produke">
-                        <img id="site-author" src="res/sitebylard.png" alt="site author">
+                        <img id="site-author" src="{$common}/res/sitebylard.png" alt="site author">
                     </a>                    
                 </div>
 

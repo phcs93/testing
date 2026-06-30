@@ -1,0 +1,237 @@
+select:not(#lang), input:not([type="checkbox"]) {
+    background-color: black;
+    color: lightgray;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid darkgray;
+    padding: 8px;
+    font-weight: bold;    
+}
+
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    max-width: 16px;
+    max-height: 16px;
+    cursor: pointer;
+    margin-right: 8px;
+    &:checked {
+        accent-color: var(--progold);
+    }
+    & + label {
+        cursor: pointer;
+        line-height: 22px;
+        text-align: center;
+    }
+}
+
+input[type="checkbox"] + label,
+input[type="checkbox"] + label > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    background-color: var(--progold);
+    border-radius: 8px;
+    height: 42px;
+    font-weight: bold;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    width: 128px;
+    &:hover {
+        background-color: lightgrey;
+    }
+}
+
+label {
+    font-family: "Candara";
+    font-size: 14px;
+    font-weight: bold;
+}
+
+hr {
+    border-color: gray;
+    width: 100%;
+    border-width: 1px 0 0 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--progold);
+    &:hover {
+        color: white;
+    }
+}
+
+p {
+    margin: 0px;
+}
+
+pre {
+    display: inline;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 4px 8px;
+    background-color: #1E1E1E;
+    @media (pointer:none), (pointer:coarse) {
+        text-wrap: auto;
+    }
+}
+
+table {
+
+    text-align: center;
+    border-collapse: collapse; 
+    font-family: "Candara";
+    font-size: 14px;
+    font-weight: bold;
+
+    & thead {
+        background-color: #1C1C1C;
+    }
+
+    & tr {
+        height: 32px;
+    }
+
+    & td, th {
+        border: 1px solid #2C2C2C;
+        padding: 8px;
+    }
+
+}
+
+/* small hack to fix <pre> overlaping */
+:not(a):not(label):not(h1):not(h2):not(h3):not(h4):not(div.arg):not(div.arg > span) > span {
+    line-height: 22px;
+}
+
+div.box {
+    background-color: #0E0E0E;
+    border-radius: 10px;
+    padding: 32px;
+    width: 800px;
+}
+
+img.sprite {
+    image-rendering: pixelated;
+    filter: drop-shadow(5px 5px 5px black);
+}
+
+img.screenshot {
+    border: 1px solid var(--progold);
+    box-shadow: 5px 5px 15px black;
+}
+
+label.badge {
+    background-color: #3E3E3E;
+    border-radius: 5px;
+    padding: 4px 8px;
+    display: block;
+    text-align: center;
+    width: 160px;
+}
+
+label.divider {
+    text-align: center !important;
+    color: var(--progold);
+    text-shadow: none;
+    display: flex !important;
+    align-items: center;
+    line-height: 20px;
+    font-weight: bold;
+    width: 100%;
+    font-size: 16px;
+    &::before, &::after {
+        border-top: 1px solid var(--progold);
+        content: "";
+        flex-grow: 1;
+        font-size: 0px;
+        line-height: 0px;
+    }
+    &::before { margin-right: 8px; }
+    &::after { margin-left: 8px; }
+}
+
+div.arg {
+
+    border-radius: 5px;
+    line-height: 32px;
+    min-height: 32px;
+    display: flex;
+    background-color: #1E1E1E;
+    font-family: monospace;
+
+    &::before {
+        display: flex;
+        content: attr(data-arg);
+        width: 192px;
+        min-width: 192px;
+        max-width: 192px;
+        background-color: #3E3E3E;
+        font-family: monospace;
+        font-size: 14px;
+        font-weight: bold;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        line-height: 32px;
+        min-height: 32px;
+        box-sizing: border-box;
+        padding-right: 16px;
+        margin-right: 16px;
+        justify-content: end;        
+    }
+
+}
+
+span[data-arg] {
+    color: var(--progold);
+}
+
+button.copy {
+    &:not(:focus) > span.copied { display: none; }
+    &:focus {
+        background-color: lightgrey;
+        & > span.copy { display: none; }
+    }
+}
+
+a.link-button {
+    background-color: var(--progold);
+    color: black;
+    text-align: center;
+    line-height: 42px;
+    border-radius: 8px;
+    height: 42px;
+    font-weight: bold;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    padding-left: 12px;
+    padding-right: 12px;
+    &:hover {
+        background-color: lightgrey;
+    }
+}
+
+ul li {
+
+    &:not(:last-child) {
+        padding-bottom: 16px;
+    }
+
+    &::marker {
+        color: var(--progold);
+        font-size: 1.2em;
+    }
+
+}
