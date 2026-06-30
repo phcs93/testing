@@ -86,12 +86,17 @@ function FilterLangTags() {
         for (const entry of fs.readdirSync(currentSrc, { withFileTypes: true })) {
             if (entry.isDirectory()) {
                 walk(currentSrc + "/" + entry.name, lang);
-            } else {
-                const srcFile = currentSrc + "/" + entry.name;
-                const html = fs.readFileSync(srcFile, "utf-8");
-                const filteredHtml = filter(html, lang);
-                fs.writeFileSync(srcFile, filteredHtml, "utf-8");
+                continue;
             }
+
+            if (!isTextFile(entry.name)) {
+                continue;
+            }
+
+            const srcFile = currentSrc + "/" + entry.name;
+            const html = fs.readFileSync(srcFile, "utf-8");
+            const filteredHtml = filter(html, lang);
+            fs.writeFileSync(srcFile, filteredHtml, "utf-8");
         }
     }
 
@@ -143,6 +148,10 @@ function ReplaceCommonPath() {
 
             if (entry.isDirectory()) {
                 walk(srcFile);
+                continue;
+            }
+
+            if (entry.name.endsWith(".html")) {
                 continue;
             }
 
